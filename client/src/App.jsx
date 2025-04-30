@@ -9,6 +9,8 @@ import './assets/libs/bootstrap-icons/font/bootstrap-icons.min.css'
 import './assets/libs/feather-webfont/dist/feather-icons.css'
 import './assets/libs/simplebar/dist/simplebar.min.css'
 
+import store from './store/store';
+import { Provider } from 'react-redux';
 
 // import $ from 'jquery';
 // window.$ = $; // Make jQuery globally available for plugins expecting $
@@ -36,10 +38,12 @@ function App() {
 
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/home" element={<HomePage />} />
-      </Routes>
+      <Provider store={store}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/home" element={<HomePage />} />
+        </Routes>
+      </Provider>
     </Router>
   )
 }

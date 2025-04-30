@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Productcard = ({productDetails}) => {
-    const {thumbnail,name,category,rating,review_count,deal_type,price,discounted_price} = productDetails
+    const {thumbnail,name,category,ratings,review_count = 1888,deal_type = 'Hot',price = 1,discounted_price = 0} = productDetails
     return (
         <div className="col">
             <div className="card card-product">
@@ -55,7 +55,7 @@ const Productcard = ({productDetails}) => {
                     </div>
                     <div className="text-small mb-1">
                         <a href="#!" className="text-decoration-none text-muted">
-                            <small>{category}</small>
+                            <small>{category.name}</small>
                         </a>
                     </div>
                     <h2 className="fs-6">
@@ -75,7 +75,7 @@ const Productcard = ({productDetails}) => {
                             <i className="bi bi-star-fill"></i>
                             <i className="bi bi-star-half"></i>
                         </small>{" "}
-                        <span className="text-muted small">{rating} ({review_count})</span>
+                        <span className="text-muted small">{ratings} ({review_count})</span>
                     </div>
                     <div className="d-flex justify-content-between align-items-center mt-3">
                         <div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Layout from "../components/Layout";
 import Catcard from "../components/Catcard";
 import Productcard from "../components/Productcard";
@@ -7,9 +7,18 @@ import Adbanner from "../components/Adbanner";
 import featuredCat from "../data/featuredCat";
 import popularProd from "../data/popularProducts";
 import productDeal from "../data/productDeal";
-
+import { useSelector, useDispatch } from "react-redux";
+import { getProductsAsync } from "../features/productSlice";
 
 const HomePage = () => {
+  const products = useSelector((state) => state.products.products);
+  const loading = useSelector((state) => state.products.loading);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProductsAsync());
+  }
+  , [dispatch]);
   return (
     <Layout>
       <main>
@@ -149,16 +158,24 @@ const HomePage = () => {
                 <h3 className="mb-0">Popular Products</h3>
               </div>
             </div>
-
+            {loading && (
+        <div className="text-center">
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      )}
+      {!loading && (
             <div className="row g-4 row-cols-lg-5 row-cols-2 row-cols-md-3">
               {
-                popularProd.map((item)=>{
+                products.map((item)=>{
                  return ( 
-                    <Productcard productDetails= {item}/>
+                    <Productcard key={item._id} productDetails= {item}/>
                 )
                 })
               }
             </div>
+      )}
           </div>
         </section>
         {/* Popular Products End*/}
