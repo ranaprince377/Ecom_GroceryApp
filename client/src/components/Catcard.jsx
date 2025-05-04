@@ -1,10 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-function Catcard({thumbnail, name}) {
+function Catcard({categoryDetails}) {
+  const {thumbnail, name, slug, _id} = categoryDetails;
   return (
     <div className="item">
-      <a
-        href="pages/shop-grid.html"
+      <Link
+        to={`category/${slug}/cid/${_id}`}
         className="text-decoration-none text-inherit"
       >
         <div className="card card-product mb-lg-4">
@@ -17,7 +19,7 @@ function Catcard({thumbnail, name}) {
             <div className="text-truncate">{name}</div>
           </div>
         </div>
-      </a>
+      </Link>
     </div>
   );
 }

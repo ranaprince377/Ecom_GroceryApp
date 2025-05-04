@@ -113,7 +113,7 @@ const HomePage = () => {
           {!categoryLoading && (
             <Slider {...settings} className="category-sliders">
               {categories.map((cat) => (
-                <Catcard key={cat._id} thumbnail={`assets/images/category/${cat.thumbnail}`} name={cat.name} />
+                <Catcard key={cat._id} categoryDetails={cat} />
               ))}
             </Slider>
           )}

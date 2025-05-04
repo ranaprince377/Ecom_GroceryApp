@@ -1,12 +1,8 @@
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const categories = useSelector((state) => state.categories.items);
-
-  useEffect(() => {
-    console.log(categories);
-  }, [])
 
   return (
     <>
@@ -165,19 +161,19 @@ const Header = () => {
           <div className="container">
             <div className="row w-100 align-items-center gx-lg-2 gx-0">
               <div className="col-xxl-2 col-lg-3">
-                <a className="navbar-brand d-none d-lg-block" href="index.html">
+                <Link className="navbar-brand d-none d-lg-block" to={"/"}>
                   <img
-                    src="assets/images/logo/freshcart-logo.svg"
+                    src="/assets/images/logo/freshcart-logo.svg"
                     alt="eCommerce HTML Template"
                   />
-                </a>
+                </Link>
                 <div className="d-flex justify-content-between w-100 d-lg-none">
-                  <a className="navbar-brand" href="index.html">
+                  <Link className="navbar-brand" to={"/"}>
                     <img
-                      src="assets/images/logo/freshcart-logo.svg"
+                      src="/assets/images/logo/freshcart-logo.svg"
                       alt="eCommerce HTML Template"
                     />
-                  </a>
+                  </Link>
 
                   <div className="d-flex align-items-center lh-1">
                     <div className="list-inline me-4">
@@ -407,7 +403,7 @@ const Header = () => {
                 <a href="index.html">
                   {" "}
                   <img
-                    src="../assets/images/logo/freshcart-logo.svg"
+                    src="/assets/images/logo/freshcart-logo.svg"
                     alt="eCommerce HTML Template"
                   />
                 </a>
@@ -600,13 +596,13 @@ const Header = () => {
                                     {cat.name}
                                   </h6>
                                   {cat.subCategories.map((subcat) => (
-                                    <a
+                                    <Link
                                       key={subcat._id}
                                       className="dropdown-item"
-                                      href="pages/shop-grid.html"
+                                      to={`/category/${cat.slug}/cid/${cat._id}/sid/${subcat._id}`}
                                     >
                                       {subcat.name}
-                                    </a>
+                                    </Link>
                                   ))}
                                 </div>
                               );
@@ -615,7 +611,7 @@ const Header = () => {
                           <div className="col-lg-3 col-12 mb-4 mb-lg-0">
                             <div className="card border-0">
                               <img
-                                src="assets/images/banner/menu-banner.jpg"
+                                src="/assets/images/banner/menu-banner.jpg"
                                 alt="eCommerce HTML Template"
                                 className="img-fluid"
                               />
@@ -637,15 +633,15 @@ const Header = () => {
                       </div>
                     </li>
                     <li className="nav-item w-100 w-lg-auto">
-                      <a
+                      <Link
                         className="nav-link"
-                        href="#"
+                        to="/"
                         role="button"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
                       >
                         Home
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item dropdown w-100 w-lg-auto">
                       <a
@@ -854,7 +850,7 @@ const Header = () => {
                   <div className="col-6 col-md-6 col-lg-7">
                     <div className="d-flex">
                       <img
-                        src="assets/images/products/product-img-1.jpg"
+                        src="/assets/images/products/product-img-1.jpg"
                         alt="Ecommerce"
                         className="icon-shape icon-xxl"
                       />
@@ -941,7 +937,7 @@ const Header = () => {
                   <div className="col-6 col-md-6 col-lg-7">
                     <div className="d-flex">
                       <img
-                        src="assets/images/products/product-img-2.jpg"
+                        src="/assets/images/products/product-img-2.jpg"
                         alt="Ecommerce"
                         className="icon-shape icon-xxl"
                       />
@@ -1031,7 +1027,7 @@ const Header = () => {
                   <div className="col-6 col-md-6 col-lg-7">
                     <div className="d-flex">
                       <img
-                        src="assets/images/products/product-img-3.jpg"
+                        src="/assets/images/products/product-img-3.jpg"
                         alt="Ecommerce"
                         className="icon-shape icon-xxl"
                       />
@@ -1123,7 +1119,7 @@ const Header = () => {
                   <div className="col-6 col-md-6 col-lg-7">
                     <div className="d-flex">
                       <img
-                        src="assets/images/products/product-img-4.jpg"
+                        src="/assets/images/products/product-img-4.jpg"
                         alt="Ecommerce"
                         className="icon-shape icon-xxl"
                       />
@@ -1216,7 +1212,7 @@ const Header = () => {
                   <div className="col-6 col-md-6 col-lg-7">
                     <div className="d-flex">
                       <img
-                        src="assets/images/products/product-img-5.jpg"
+                        src="/assets/images/products/product-img-5.jpg"
                         alt="Ecommerce"
                         className="icon-shape icon-xxl"
                       />
@@ -1469,7 +1465,7 @@ const Header = () => {
                       style={{ backgroundImage: "url(assets/images/products/product-single-img-1.jpg)" }} >
                       {/* img */}
                       <img
-                        src="assets/images/products/product-single-img-1.jpg"
+                        src="/assets/images/products/product-single-img-1.jpg"
                         alt=""
                       />
                     </div>
@@ -1482,7 +1478,7 @@ const Header = () => {
                         }}>
                         {/* img */}
                         <img
-                          src="assets/images/products/product-single-img-2.jpg"
+                          src="/assets/images/products/product-single-img-2.jpg"
                           alt=""
                         />
                       </div>
@@ -1496,7 +1492,7 @@ const Header = () => {
                         }}>
                         {/* img */}
                         <img
-                          src="assets/images/products/product-single-img-3.jpg"
+                          src="/assets/images/products/product-single-img-3.jpg"
                           alt=""
                         />
                       </div>
@@ -1510,7 +1506,7 @@ const Header = () => {
                         }} >
                         {/* img */}
                         <img
-                          src="assets/images/products/product-single-img-4.jpg"
+                          src="/assets/images/products/product-single-img-4.jpg"
                           alt=""
                         />
                       </div>
@@ -1526,7 +1522,7 @@ const Header = () => {
                         <div className="thumbnails-img">
                           {/* img */}
                           <img
-                            src="assets/images/products/product-single-img-1.jpg"
+                            src="/assets/images/products/product-single-img-1.jpg"
                             alt=""
                           />
                         </div>
@@ -1535,7 +1531,7 @@ const Header = () => {
                         <div className="thumbnails-img">
                           {/* img */}
                           <img
-                            src="assets/images/products/product-single-img-2.jpg"
+                            src="/assets/images/products/product-single-img-2.jpg"
                             alt=""
                           />
                         </div>
@@ -1544,7 +1540,7 @@ const Header = () => {
                         <div className="thumbnails-img">
                           {/* img */}
                           <img
-                            src="assets/images/products/product-single-img-3.jpg"
+                            src="/assets/images/products/product-single-img-3.jpg"
                             alt=""
                           />
                         </div>
@@ -1553,7 +1549,7 @@ const Header = () => {
                         <div className="thumbnails-img">
                           {/* img */}
                           <img
-                            src="assets/images/products/product-single-img-4.jpg"
+                            src="/assets/images/products/product-single-img-4.jpg"
                             alt=""
                           />
                         </div>
