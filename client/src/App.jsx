@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import Layout from './components/Layout.jsx';
 import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage.jsx';
+import ProductDetailsPage from './pages/ProductDetailsPage.jsx';
 
 import './assets/styles';
 import './assets/js/vendor.js';
@@ -21,6 +22,7 @@ function App() {
             <Route path="home" element={<HomePage />} />
             <Route path="category/:catSlug/cid/:catId" element={<ProductsPage />} />
             <Route path="category/:catSlug/cid/:catId/sid/:subCatId" element={<ProductsPage />} />
+            <Route path="product/:slug/pid/:productId" element={<ProductDetailsPage />} />
           </Route>
         </Routes>
       </Router>

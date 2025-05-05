@@ -645,11 +645,12 @@ const Header = () => {
                     </li>
                     <li className="nav-item dropdown w-100 w-lg-auto">
                       <a
-                        className="nav-link dropdown-toggle"
+                        className="nav-link dropdown-toggle d-flex align-items-center justify-content-between"
                         href="#"
                         role="button"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
+                        style={{width: '85px'}}
                       >
                         Account
                       </a>

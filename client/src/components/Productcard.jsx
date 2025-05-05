@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Productcard = ({productDetails}) => {
-    const {thumbnail,name,category,ratings,review_count = 1888,deal_type = 'Hot',price = 1,discounted_price = 0} = productDetails
+    const {thumbnail,name,category,ratings,review_count = 1888,deal_type = 'Hot',price = 1,discounted_price = 0, _id, slug} = productDetails
     return (
         <div className="col">
             <div className="card card-product">
@@ -59,12 +60,11 @@ const Productcard = ({productDetails}) => {
                         </a>
                     </div>
                     <h2 className="fs-6">
-                        <a
-                            href="pages/shop-single.html"
+                        <Link to={`/product/${slug}/pid/${_id}`}
                             className="text-inherit text-decoration-none"
                         >
                             {name}
-                        </a>
+                        </Link>
                     </h2>
                     <div>
                         <small className="text-warning">
@@ -86,21 +86,7 @@ const Productcard = ({productDetails}) => {
                         </div>
                         <div>
                             <a href="#!" className="btn btn-primary btn-sm">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    className="feather feather-plus"
-                                >
-                                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                </svg>{" "}
+                            <i class="bi bi-plus"></i>{" "}
                                 Add
                             </a>
                         </div>
