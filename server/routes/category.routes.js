@@ -11,6 +11,7 @@ const {
     // updateSubCategory,
     // deleteSubCategory
 } = require('../controllers/categoryController.js');
+const {getProductByCategoryId, getProductBySubCategoryId} = require('../controllers/productController.js');
 
 const router = express.Router();
 
@@ -19,6 +20,9 @@ router.get('/:id', getCategoryById);
 router.post('/', createCategory);
 router.put('/:id', updateCategory);
 router.delete('/:id', deleteCategory);
+
+router.get('/:catId/products', getProductByCategoryId);
+router.get('/:id?/sid/:subCatId/products', getProductBySubCategoryId);
 
 // router.get('/sub-category/', getAllSubCategory);
 // router.get('/sub-category/:id', getSubCategoryById);

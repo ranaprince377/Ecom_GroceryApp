@@ -99,6 +99,62 @@ const getProductById = asyncHandler(async (req, res) => {
     res.status(200).json(new ApiResponse(200, 'Product details fetched successfully.', products[0]));
 });
 
+const getProductByCategoryId = asyncHandler(async (req, res) => {
+    const catId = req.params.catId;
+
+    const products = await Product.aggregate([
+        {
+            $match: { category: new mongoose.Types.ObjectId(catId) }
+        },
+        {
+            $lookup: {
+                from: 'categories',
+                localField: 'category',
+                foreignField: '_id',
+                as: 'category'
+            }
+        },
+        {
+            $lookup: {
+                from: 'subcategories',
+                localField: 'subCategory',
+                foreignField: '_id',
+                as: 'subCategory'
+            }
+        },
+        {
+            $addFields :{
+                category: { $arrayElemAt: ['$category', 0]},
+                subCategory: { $arrayElemAt: ["$subCategory", 0] }
+            }
+        },
+        {
+            $project: {
+                __v: 0,
+                category: {
+                    __v: 0,
+                    createdAt: 0,
+                    updatedAt: 0
+                },
+                subCategory: {
+                    __v: 0,
+                    createdAt: 0,
+                    updatedAt: 0
+                }
+            }
+        },
+        {
+            $sort: { updatedAt: -1 }
+        }
+    ]);
+
+    if(products.length == 0){
+        throw new ApiError(404, 'No product found in given category.');
+    }
+    
+    res.status(200).json(new ApiResponse(200, 'Products found in given category.', products));
+});
+
 const getProductBySubCategoryId = asyncHandler(async (req, res) => {
     const subCatId = req.params.subCatId;
     
@@ -149,10 +205,10 @@ const getProductBySubCategoryId = asyncHandler(async (req, res) => {
     ]);
 
     if(products.length == 0){
-        throw new ApiError(404, 'No product found in given category.');
+        throw new ApiError(404, 'No product found in given sub category.');
     }
     
-    res.status(200).json(new ApiResponse(200, 'Products found in given category.', products));
+    res.status(200).json(new ApiResponse(200, 'Products found in given sub category.', products));
 });
 
 const createProduct = asyncHandler(async (req, res) =>{
@@ -225,7 +281,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 module.exports = { 
     getAllProducts, 
     getProductById, 
-    // getProductByCategoryId, 
+    getProductByCategoryId, 
     getProductBySubCategoryId, 
     createProduct, 
     updateProduct, 
