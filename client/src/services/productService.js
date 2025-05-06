@@ -1,5 +1,16 @@
 import config from '../config.js';
 
+const getProductById = async (prodId) => {
+    if(!prodId) return [];
+
+    const API_URL = `${config.API_BASE_URL}/product/${prodId}`;
+    const response = await fetch(API_URL);
+
+    if(response.ok) {
+        const data = await response.json();
+        return data.data; 
+    }
+}
 
 const getProducts = async () => {
     const API_URL = `${config.API_BASE_URL}/product`;
@@ -36,5 +47,5 @@ const getProductsBySubCategoryId = async (catId, subCatId) =>{
     return [];
 }
 
-export { getProducts, getProductsByCategoryId, getProductsBySubCategoryId};
+export { getProductById, getProducts, getProductsByCategoryId, getProductsBySubCategoryId};
 export default getProducts;

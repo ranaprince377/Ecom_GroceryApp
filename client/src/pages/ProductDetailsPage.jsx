@@ -1,6 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { getProductById } from '../services/productService';
 
-const ProductDetailsPage = ({product}) => {
+const ProductDetailsPage = () => {
+    const { productId } = useParams();
+    const [product, setProduct] = useState([]);
+
+    useEffect(()=>{
+        (async () => {
+            const product = await getProductById(productId);
+            setProduct(product);
+        })();
+    }, [productId]);
+
     return (
         <main>
             <div className="mt-4">
@@ -14,7 +26,7 @@ const ProductDetailsPage = ({product}) => {
                                 <ol className="breadcrumb mb-0">
                                     <li className="breadcrumb-item"><a href="#">Home</a></li>
                                     <li className="breadcrumb-item"><a href="#">Bakery Biscuits</a></li>
-                                    <li className="breadcrumb-item active" aria-current="page">Napolitanke Ljesnjak</li>
+                                    <li className="breadcrumb-item active" aria-current="page">{product?.name}</li>
                                 </ol>
                             </nav>
                         </div>
@@ -29,33 +41,9 @@ const ProductDetailsPage = ({product}) => {
                             <div className="product" id="product">
                                 <div
                                     className="zoom"
-                                    style={{ backgroundImage: 'url(/assets/images/products/product-single-img-1.jpg)' }}
+                                    style={{ backgroundImage: `url(/${product?.thumbnail})` }}
                                 >
-                                    <img src="/assets/images/products/product-single-img-1.jpg" alt="" />
-                                </div>
-                                <div>
-                                    <div
-                                        className="zoom"
-                                        style={{ backgroundImage: 'url(/assets/images/products/product-single-img-2.jpg)' }}
-                                    >
-                                        <img src="/assets/images/products/product-single-img-2.jpg" alt="" />
-                                    </div>
-                                </div>
-                                <div>
-                                    <div
-                                        className="zoom"
-                                        style={{ backgroundImage: 'url(/assets/images/products/product-single-img-3.jpg)' }}
-                                    >
-                                        <img src="/assets/images/products/product-single-img-3.jpg" alt="" />
-                                    </div>
-                                </div>
-                                <div>
-                                    <div
-                                        className="zoom"
-                                        style={{ backgroundImage: 'url(/assets/images/products/product-single-img-4.jpg)' }}
-                                    >
-                                        <img src="/assets/images/products/product-single-img-4.jpg" alt="" />
-                                    </div>
+                                    <img src={`/${product?.thumbnail}`} alt="" />
                                 </div>
                             </div>
                             {/* product tools */}
@@ -63,7 +51,7 @@ const ProductDetailsPage = ({product}) => {
                                 <div className="thumbnails row g-3" id="productThumbnails">
                                     <div className="col-3">
                                         <div className="thumbnails-img">
-                                            <img src="/assets/images/products/product-single-img-1.jpg" alt="" />
+                                            <img src={`/${product?.thumbnail}`} alt="" />
                                         </div>
                                     </div>
                                     <div className="col-3">
@@ -87,9 +75,9 @@ const ProductDetailsPage = ({product}) => {
                         <div className="col-md-6">
                             <div className="ps-lg-10 mt-6 mt-md-0">
                                 {/* content */}
-                                <a href="#!" className="mb-4 d-block">Bakery Biscuits</a>
+                                <a href="#!" className="mb-4 d-block">{product?.category?.name} / {product?.subCategory?.name}</a>
                                 {/* heading */}
-                                <h1 className="mb-1">Napolitanke Ljesnjak </h1>
+                                <h1 className="mb-1">{product?.name} </h1>
                                 <div className="mb-4">
                                     {/* rating */}
                                     <small className="text-warning">
